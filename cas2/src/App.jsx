@@ -4,33 +4,33 @@ import {Age} from "./components/Age"
 
 export function App() {
 
-var user1 ={
+let user1 ={
   ime:"Dimitar",
   prezime:"Dimoski",
   adresa:"Prilep",
-  godini:"29"
+  godini:29
 };
-var user2 ={
+let user2 ={
   ime:"Ana",
   prezime:"Maneska",
   adresa:"Skopje",
-  godini:"21"
+  godini:21
 };
-var user3 ={
+let user3 ={
   ime:"Mihail",
   prezime:"Taneski",
   adresa:"Prilep",
-  godini:"17"
+  godini:17
 };
-var user4 ={
+let user4 ={
   ime:"Ksenija",
   prezime:"Abramova",
   adresa:"Bitola",
-  godini:"24"
+  godini:24
 };
 
 
-var users = [user1, user2, user3, user4];
+let users = [user1, user2, user3, user4];
 
   return( <div>
 
