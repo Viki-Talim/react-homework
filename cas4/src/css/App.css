@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f7f6;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+#app {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+#signup h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+#signup p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+#signup input,
+#signup textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+#signup input:focus,
+#signup textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+#signup button[type="button"]:not(.action-button) {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s;
+}
+
+#signup button[type="button"]:not(.action-button):hover {
+  background: #e2e2e2;
+  color: #000;
+}
+
+.action-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.action-button:hover {
+  background-color: #218838;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+}
+
+table th,
+table td {
+  border: 1px solid #dee2e6;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+table th {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #eee;
+  margin: 30px 0;
+}
