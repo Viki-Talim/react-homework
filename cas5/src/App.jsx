@@ -1,109 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Todos } from "./components/Todos";
 
-// Domashna:  Da se dodade delete funkcionalnost na kodot od casot i da se napravi Random generated id na elementite
-
 export function App() {
-  const [car, setCar] = useState({ model: "BMW", year: 2015 });
-  const [days, setDays] = useState(["Monday", "Tuesday", "Wednesday"]);
-  const [person, setPerson] = useState({ firstName: "", lastName: "" });
+  const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
+  const [showCompleted, setShowCompleted] = useState(true);
 
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", done: false },
-    { id: 2, text: "Eat Dinner", done: false },
-    { id: 3, text: "Go to sleep", done: false },
-  ]);
-  function newCar() {
-    setCar({
-      ...car,
-      year: 2020,
-    });
-  }
-  function addDays() {
-    setDays(["Sunday", ...days, "Thursday"]);
-  }
   function addNewTodo() {
     if (newTodo.trim() !== "") {
-      let newObject = {
-        id: crypto.randomUUID(),
-        // id: todos.length + 1,
+      const maxId = todos.length > 0 ? Math.max(...todos.map((t) => t.id)) : 0;
+      const newObject = {
+        id: Math.floor(maxId + 1),
         text: newTodo,
         done: false,
       };
       setTodos([...todos, newObject]);
       setNewTodo("");
-    } else {
-      alert(
-        "No value has been entered/nPlease enter a value then submit the new Todo",
-      );
     }
   }
-  function markTodoAsDone(clickedTodo) {
-    setTodos([
-      ...todos.map((item) =>
-        item.id === clickedTodo.id
-          ? { id: item.id, text: item.text, done: !item.done }
-          : item,
-      ),
-    ]);
-  }
+
   function deleteTodo(id) {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(updatedTodos);
-    alert("Are you sure?");
+    setTodos(todos.filter((todo) => todo.id !== id));
   }
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
+
+  function markTodoAsDone(id) {
+    setTodos(
+      todos.map((item) =>
+        item.id === id ? { ...item, done: !item.done } : item,
+      ),
+    );
+  }
+
+  function saveEdit(id, newText) {
+    setTodos(
+      todos.map((item) => (item.id === id ? { ...item, text: newText } : item)),
+    );
+  }
+
+  const completedCount = todos.filter((t) => t.done).length;
+
+  const filteredTodos = showCompleted ? todos : todos.filter((t) => !t.done);
 
   return (
-    <div id="app">
+    <div>
       <input
         type="text"
-        placeholder="Enter TODO"
+        placeholder="Enter Element"
         value={newTodo}
-        onChange={(e) => {
-          setNewTodo(e.target.value);
-        }}
+        onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={addNewTodo}>Add TODO</button>
-      <Todos
-        todos={todos}
-        markTodoAsDone={markTodoAsDone}
-        deleteTodo={deleteTodo}
-      />
-      <hr/>
-      <h2>Car:</h2>
-      <p>Model:{car.model}</p>
-      <p>Year:{car.year}</p>
-      <button onClick={newCar}>Buy new car</button>
-      <hr />
-      <ul>
-        {days.map((day, i) => (
-          <li key={i}>{day}</li>
-        ))}
-      </ul>
-      <button onClick={addDays}>Add Days</button>
+      <button onClick={addNewTodo}>Add Element</button>
 
-      <hr />
-      <input
-        type="text"
-        placeholder="Enter First Name"
-        value={person.firstName}
-        onChange={(e) => {
-          setPerson({ ...person, firstName: e.target.value });
-        }}
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="Enter Last Name"
-        value={person.lastName}
-        onChange={(e) => {
-          setPerson({ ...person, lastName: e.target.value });
-        }}
-      />
+      {todos.length === 0 ? (
+        <h1>No Items added to Array yet !!!</h1>
+      ) : (
+        <>
+          <h2>Number of completed Items: {completedCount}</h2>
+          <button onClick={() => setShowCompleted(!showCompleted)}>
+            {showCompleted ? "Hide Completed" : "Show Completed"}
+          </button>
+
+          <Todos
+            todos={filteredTodos}
+            markTodoAsDone={markTodoAsDone}
+            deleteTodo={deleteTodo}
+            saveEdit={saveEdit}
+          />
+        </>
+      )}
     </div>
   );
 }
