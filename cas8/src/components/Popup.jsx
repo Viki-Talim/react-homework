@@ -1,0 +1,27 @@
+import { useContext } from "react";
+import { GalleryContext } from "../utils/GalleryContext";
+
+export const Popup = () => {
+  const { selectedImage, setSelectedImage, deletePhoto } =
+    useContext(GalleryContext);
+  return (
+    <div id="popup">
+      <button
+        onClick={() => {
+          setSelectedImage("");
+        }}
+        className="close-popup"
+      >
+        &times;
+      </button>
+      <div className="popup-container">
+        <img src={selectedImage} alt={"Image"} />
+        <button
+          className="delete-btn"
+          onClick={() => deletePhoto(selectedImage)}>
+          Delete Photo
+        </button>
+      </div>
+    </div>
+  );
+};
