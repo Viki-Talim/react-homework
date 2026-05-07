@@ -15,13 +15,13 @@ const initialState = {
 const CakeReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_BUY_INPUT:
-      return { ...state, 
-        buyInputValue: action.payload };
+      return { ...state, buyInputValue: action.payload };
 
     case BUY_CAKE:
       if (state.buyInputValue <= 0) {
         return {
           ...state,
+
           errorMessage: "Please enter a valid amount to buy.",
         };
       }
@@ -29,6 +29,7 @@ const CakeReducer = (state = initialState, action) => {
         return {
           ...state,
           errorMessage: `Not enough cakes! Only ${state.cakes} left.`,
+          buyInputValue: 0,
         };
       }
       return {
